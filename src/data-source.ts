@@ -3,7 +3,7 @@ const { DataSource } = require("typeorm");
 require("dotenv").config();
 const { DB_USER, DB_PASSWORD, DATABASE } = process.env;
 
-const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: "postgres",
   host: "localhost",
   port: 5432,
@@ -16,5 +16,3 @@ const AppDataSource = new DataSource({
   subscribers: [],
   migrations: [],
 });
-
-exports.AppDataSource = AppDataSource;

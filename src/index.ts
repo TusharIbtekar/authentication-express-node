@@ -1,10 +1,12 @@
+import { Request, Response } from "express";
+
 require("reflect-metadata");
 const express = require("express");
 const { AppDataSource } = require("./data-source");
 const app = express();
-port = 3000;
+const port = 3000;
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Hello from App Engine!");
 });
 
