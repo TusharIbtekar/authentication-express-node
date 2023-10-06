@@ -1,8 +1,16 @@
-export class Photo {
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity("users")
+export class User extends BaseEntity {
+  @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
   name: string;
-  description: string;
-  filename: string;
-  views: number;
-  isPublished: boolean;
+
+  @Column()
+  email: string;
+
+  @Column()
+  password: string;
 }

@@ -1,4 +1,5 @@
-const { DataSource } = require("typeorm");
+import { User } from "./entity/User";
+import { DataSource } from "typeorm";
 
 require("dotenv").config();
 const { DB_USER, DB_PASSWORD, DATABASE } = process.env;
@@ -12,7 +13,7 @@ export const AppDataSource = new DataSource({
   database: DATABASE,
   synchronize: true,
   logging: true,
-  entities: [],
+  entities: [User],
   subscribers: [],
   migrations: [],
 });
