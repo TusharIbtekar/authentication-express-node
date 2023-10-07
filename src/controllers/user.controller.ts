@@ -22,4 +22,25 @@ export const UserController = {
 
     // AppDataSource.destroy();
   },
+  async login(req: Request, res: Response) {
+    let user = await User.findOne({ where: { email: req.body.email } });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ errors: { msg: "You have to register first." } });
+    } else {
+      const validatePassword = bcrypt.compareSync(
+        req.body.password,
+        user.password
+      );
+
+      if (validatePassword) {
+        res.send(user);
+      } else {
+        return res.status(400).json({ errors: { msg: "Wrong password." } });
+      }
+    }
+
+    // AppDataSource.destroy();
+  },
 };
