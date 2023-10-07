@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { body, validationResult } from "express-validator";
-import { AppDataSource } from "./data-source";
+import AppDataSource from "./data-source";
 import { User } from "./entity/User";
 import express from "express";
 
@@ -24,8 +24,6 @@ app.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    await AppDataSource.connect();
-
     let user = await User.findOne({ where: { email: req.body.email } });
     if (user) {
       return res.status(400).json({ errors: { msg: "User already exists" } });
@@ -37,8 +35,12 @@ app.post(
         email: req.body.email,
         password: hashedPassword,
       });
+      await AppDataSource.manager.save(user);
       res.send(user);
+      // await AppDataSource.initialize();
     }
+
+    // AppDataSource.destroy();
   }
 );
 
