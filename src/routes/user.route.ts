@@ -19,7 +19,7 @@ routes.get("/", (req: Request, res: Response) => {
 });
 
 routes.put("/user/:id", updateUserValidator, UserController.updateUser);
-
 routes.get("/user/:id", UserController.getUser);
+routes.delete("/user/:id", UserController.deleteUser);
 
 export default routes;
