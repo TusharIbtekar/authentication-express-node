@@ -1,46 +1,9 @@
-import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import AppDataSource from "../data-source";
 import { User } from "../entity/User";
 
 export const UserController = {
-  async register(req: Request, res: Response) {
-    let user = await User.findOne({ where: { email: req.body.email } });
-    if (user) {
-      return res.status(400).json({ errors: { msg: "User already exists" } });
-    } else {
-      const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+  async getUserByEmail(email: string) {
+    const user = await User.findOne({ where: { email: email } });
 
-      user = User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: hashedPassword,
-      });
-      await AppDataSource.manager.save(user);
-      res.send(user);
-    }
-
-    // AppDataSource.destroy();
-  },
-  async login(req: Request, res: Response) {
-    let user = await User.findOne({ where: { email: req.body.email } });
-    if (!user) {
-      return res
-        .status(400)
-        .json({ errors: { msg: "You have to register first." } });
-    } else {
-      const validatePassword = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
-
-      if (validatePassword) {
-        res.send(user);
-      } else {
-        return res.status(400).json({ errors: { msg: "Wrong password." } });
-      }
-    }
-
-    // AppDataSource.destroy();
+    return user;
   },
 };
