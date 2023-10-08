@@ -24,4 +24,9 @@ routes.get("/", (req: Request, res: Response) => {
 
 routes.put("/user/:id", updateUserValidator, UserController.updateUser);
 
+routes.get("/user/:id", async (req: Request, res: Response) => {
+  const user = await UserController.getUser(req, res);
+  res.send(user);
+});
+
 export default routes;
