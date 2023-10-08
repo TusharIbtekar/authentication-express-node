@@ -5,14 +5,10 @@ import { updateUserValidator } from "../validators/updateUser.validator";
 import { registerValidator } from "../validators/register.validator";
 import { AuthController } from "../controllers/auth.controller";
 import { loginValidator } from "../validators/login.validator";
-import { User } from "../entity/User";
 
 const routes = Router();
 
-routes.get("/user", async (req: Request, res: Response) => {
-  const allUsers = await UserController.getUsers();
-  res.send(allUsers);
-});
+routes.get("/user", UserController.getUsers);
 
 routes.post("/register", registerValidator, AuthController.register);
 
@@ -24,9 +20,6 @@ routes.get("/", (req: Request, res: Response) => {
 
 routes.put("/user/:id", updateUserValidator, UserController.updateUser);
 
-routes.get("/user/:id", async (req: Request, res: Response) => {
-  const user = await UserController.getUser(req, res);
-  res.send(user);
-});
+routes.get("/user/:id", UserController.getUser);
 
 export default routes;
