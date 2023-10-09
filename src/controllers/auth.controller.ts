@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import AppDataSource from "../data-source";
 import { User } from "../entity/User";
-import { JWTController } from "./jwt.controller";
 import { getUserByEmail } from "./user.controller";
+import { createToken } from "./jwt.controller";
 
 export const register = async (req: Request, res: Response) => {
   let user = await getUserByEmail(req.body.email);
@@ -18,7 +18,7 @@ export const register = async (req: Request, res: Response) => {
       password: hashedPassword,
     });
 
-    const token = JWTController.createToken({ email: user.email }, true);
+    const token = createToken({ email: user.email }, true);
 
     res.cookie("refresh_token", token.refresh_token, {
       expires: new Date(
@@ -49,7 +49,7 @@ export const login = async (req: Request, res: Response) => {
     );
 
     if (validatePassword) {
-      const token = JWTController.createToken({ email: user.email }, true);
+      const token = createToken({ email: user.email }, true);
 
       res.cookie("refresh_token", token.refresh_token, {
         expires: new Date(

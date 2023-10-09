@@ -6,7 +6,6 @@ import {
   updateUser,
 } from "../controllers/user.controller";
 import { updateUserValidator } from "../validators/updateUser.validator";
-import { JWTController } from "../controllers/jwt.controller";
 
 const userRoutes = Router();
 
