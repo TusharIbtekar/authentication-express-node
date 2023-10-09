@@ -10,7 +10,11 @@ routes.get("/", (req: Request, res: Response) => {
   res.send("Hello from App Engine!");
 });
 
-routes.use("/user", userRoutes);
+routes.use(
+  "/user",
+  JWTController.verifyAccessToken.bind(JWTController),
+  userRoutes
+);
 routes.use("/", authRoutes);
 
 routes.get(

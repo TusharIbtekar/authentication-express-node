@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import AppDataSource from "../data-source";
 import { User } from "../entity/User";
-import { UserController } from "./user.controller";
 import { JWTController } from "./jwt.controller";
+import { getUserByEmail } from "./user.controller";
 
 export const register = async (req: Request, res: Response) => {
-  let user = await UserController.getUserByEmail(req.body.email);
+  let user = await getUserByEmail(req.body.email);
   if (user) {
     return res.status(400).json({ errors: { msg: "User already exists" } });
   } else {
@@ -34,12 +34,10 @@ export const register = async (req: Request, res: Response) => {
     await AppDataSource.manager.save(user);
     res.send({ user, access_token: token.access_token });
   }
-
-  // AppDataSource.destroy();
 };
 
 export const login = async (req: Request, res: Response) => {
-  let user = await UserController.getUserByEmail(req.body.email);
+  let user = await getUserByEmail(req.body.email);
   if (!user) {
     return res
       .status(400)
@@ -68,6 +66,4 @@ export const login = async (req: Request, res: Response) => {
       return res.status(400).json({ errors: { msg: "Wrong password." } });
     }
   }
-
-  // AppDataSource.destroy();
 };
