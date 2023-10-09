@@ -1,7 +1,4 @@
 import express from "express";
-import { registerValidator } from "./validators/register.validator";
-import { AuthController } from "./controllers/auth.controller";
-import { loginValidator } from "./validators/login.validator";
 import routes from "./routes/base.route";
 
 require("reflect-metadata");

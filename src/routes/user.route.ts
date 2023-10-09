@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { Request, Response } from "express";
 import { UserController } from "../controllers/user.controller";
 import { updateUserValidator } from "../validators/updateUser.validator";
 import { JWTController } from "../controllers/jwt.controller";
