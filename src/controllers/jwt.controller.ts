@@ -4,23 +4,15 @@ dotenv.config();
 
 export const JWTController = {
   createToken(payload: any, refresh = false) {
-    const accessToken = jwt.sign(
-      {
-        exp: 10,
-        data: payload,
-      },
-      process.env.JWT_SECRET as string
-    );
+    const accessToken = jwt.sign(payload, process.env.JWT_SECRET as string, {
+      expiresIn: 30,
+    });
     return {
       access_token: accessToken,
       refresh_token: refresh
-        ? jwt.sign(
-            {
-              exp: 30 * 24 * 60 * 60,
-              data: payload,
-            },
-            process.env.JWT_SECRET as string
-          )
+        ? jwt.sign(payload, process.env.JWT_SECRET as string, {
+            expiresIn: 30 * 24 * 60 * 60,
+          })
         : null,
     };
   },
