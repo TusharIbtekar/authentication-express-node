@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import AppDataSource from "../data-source";
 import { User } from "../entity/User";
 import { UserController } from "./user.controller";
+import { JWTController } from "./jwt.controller";
 
 export const AuthController = {
   async register(req: Request, res: Response) {
@@ -17,12 +18,27 @@ export const AuthController = {
         email: req.body.email,
         password: hashedPassword,
       });
+
+      const token = JWTController.createToken({ email: user.email }, true);
+
+      res.cookie("refresh_token", token.refresh_token, {
+        expires: new Date(
+          Date.now() +
+            parseInt(process.env.JWT_REFRESH_TOKEN_EXPIRES_IN as string) *
+              30 *
+              24 *
+              360000
+        ),
+        httpOnly: true,
+      });
+
       await AppDataSource.manager.save(user);
       res.send(user);
     }
 
     // AppDataSource.destroy();
   },
+
   async login(req: Request, res: Response) {
     let user = await UserController.getUserByEmail(req.body.email);
     if (!user) {

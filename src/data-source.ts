@@ -1,7 +1,8 @@
 import { User } from "./entity/User";
 import { DataSource } from "typeorm";
+import dotenv from "dotenv";
+dotenv.config();
 
-require("dotenv").config();
 const { DB_USER, DB_PASSWORD, DATABASE } = process.env;
 
 const AppDataSource = new DataSource({
