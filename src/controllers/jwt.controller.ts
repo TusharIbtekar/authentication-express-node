@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { Request, Response, NextFunction } from "express";
 dotenv.config();
 
 export const JWTController = {
@@ -23,6 +24,19 @@ export const JWTController = {
       return decoded;
     } catch (error) {
       return null;
+    }
+  },
+
+  verifyAccessToken(req: Request, res: Response, next: NextFunction) {
+    const authHeader = req.headers["authorization"];
+    if (!authHeader)
+      return res.status(405).json({ errors: { msg: "No token provided" } });
+
+    const token = authHeader.split(" ")[1];
+    if (!this.verifyToken(token))
+      return res.status(401).json({ errors: { msg: "Unauthorized" } });
+    else {
+      next();
     }
   },
 };
