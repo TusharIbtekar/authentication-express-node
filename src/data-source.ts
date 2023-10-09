@@ -3,12 +3,12 @@ import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 dotenv.config();
 
-const { DB_USER, DB_PASSWORD, DATABASE } = process.env;
+const { DB_USER, DB_PASSWORD, DATABASE, DB_HOST, DB_PORT } = process.env;
 
 const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
-  port: 5432,
+  host: DB_HOST || "localhost",
+  port: DB_PORT ? parseInt(DB_PORT) : 5432,
   username: DB_USER,
   password: DB_PASSWORD,
   database: DATABASE,
