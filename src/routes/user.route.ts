@@ -23,6 +23,11 @@ routes.get("/", (req: Request, res: Response) => {
   res.send("Hello from App Engine!");
 });
 
+routes.get(
+  "/new_access_token",
+  JWTController.grantNewAccessToken.bind(JWTController)
+);
+
 routes.put("/user/:id", updateUserValidator, UserController.updateUser);
 routes.get("/user/:id", UserController.getUser);
 routes.delete("/user/:id", UserController.deleteUser);
