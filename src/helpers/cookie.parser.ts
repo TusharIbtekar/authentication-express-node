@@ -4,6 +4,5 @@ export const cookieParser = (cookieName: string, cookies: string) => {
     .find((c) => c.trim().startsWith(`${cookieName}=`))
     ?.split("=")[1];
 
-  console.log(cookie);
   return cookie as string;
 };
