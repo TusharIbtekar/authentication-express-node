@@ -24,6 +24,24 @@ const userRoutes = Router();
 userRoutes.get("/", getUsers);
 
 userRoutes.put("/:id", updateUserValidator, updateUser);
+
+/**
+ * @swagger
+ * /user/{id}:
+ *   get:
+ *     tags:
+ *      - Fetch one user
+ *     summary: Use to fetch user with id
+ *     description: Use this endpoint to fetch the parameter given user.
+ *     parameters:
+ *      - name: id
+ *        in: path
+ *        description: The id of the user to fetch
+ *        required: true
+ *     responses:
+ *       '200':
+ *         description: Successfully fetched
+ */
 userRoutes.get("/:id", getUser);
 userRoutes.delete("/:id", deleteUser);
 
