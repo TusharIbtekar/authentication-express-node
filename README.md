@@ -16,5 +16,13 @@ cd authentication-express-node && pnpm install
 pnpm dev
 ```
 
+## Running with docker
+
+```sh
+git clone git@github.com:TusharIbtekar/authentication-express-node.git
+cd authentication-express-node
+docker compose up -d
+```
+
 The above commands will start the application on [http://localhost:3000/](http://localhost:3000)
 
