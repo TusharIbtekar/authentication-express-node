@@ -77,7 +77,7 @@ userRoutes.get("/", getUsers);
  *             $ref: '#/components/schemas/UpdateUserInput'
  *     responses:
  *       '200':
- *         description: Successful login
+ *         description: Successfully updated
  *         content:
  *          application/json:
  *            schema:
@@ -107,6 +107,49 @@ userRoutes.put("/:id", updateUserValidator, updateUser);
  *         description: Successfully fetched
  */
 userRoutes.get("/:id", getUser);
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    DeleteUserResponse:
+ *      type: object
+ *      properties:
+ *        email:
+ *          type: string
+ *        name:
+ *          type: string
+ *        id:
+ *          type: number
+ *        password:
+ *          type: string
+ */
+
+/**
+ * @swagger
+ * /user/{id}:
+ *   delete:
+ *     tags:
+ *      - User
+ *     summary: Use to delete user info
+ *     description: Use this endpoint to delete user information with user id.
+ *     parameters:
+ *      - name: id
+ *        in: path
+ *        description: The id of the user to delete
+ *        required: true
+ *     responses:
+ *       '200':
+ *         description: Successfully deleted
+ *         content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/DeleteUserResponse'
+ *       '400':
+ *         description: Invalid input data
+ *       '401':
+ *         description: Unauthorized - Invalid credentials
+ */
 userRoutes.delete("/:id", deleteUser);
 
 export default userRoutes;
