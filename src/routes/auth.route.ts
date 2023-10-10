@@ -70,7 +70,7 @@ authRoutes.post("/register", registerValidator, register);
  * @openapi
  * components:
  *  schemas:
- *    CreateUserInput:
+ *    LoginUserInput:
  *      type: object
  *      required:
  *        - email
@@ -82,7 +82,7 @@ authRoutes.post("/register", registerValidator, register);
  *        password:
  *          type: string
  *          default: hello
- *    CreateUserResponse:
+ *    LoginUserResponse:
  *      type: object
  *      properties:
  *        email:
@@ -108,14 +108,14 @@ authRoutes.post("/register", registerValidator, register);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/CreateUserInput'
+ *             $ref: '#/components/schemas/LoginUserInput'
  *     responses:
  *       '200':
  *         description: Successful login
  *         content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/CreateUserResponse'
+ *              $ref: '#/components/schemas/LoginUserResponse'
  *       '400':
  *         description: Invalid input data
  *       '401':
