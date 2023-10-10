@@ -20,6 +20,7 @@ pnpm dev
 
 ```sh
 git clone git@github.com:TusharIbtekar/authentication-express-node.git
+cd authentication-express-node
 docker compose up -d
 ```
 
