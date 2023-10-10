@@ -42,7 +42,7 @@ const authRoutes = Router();
  * /register:
  *   post:
  *     tags:
- *      - Register
+ *      - Auth
  *     summary: Use to Register
  *     description: Use this endpoint to create a new user.
  *     requestBody:
@@ -100,7 +100,7 @@ authRoutes.post("/register", registerValidator, register);
  * /login:
  *   post:
  *     tags:
- *      - Login
+ *      - Auth
  *     summary: Use to login
  *     description: Use this endpoint to authenticate a user.
  *     requestBody:
