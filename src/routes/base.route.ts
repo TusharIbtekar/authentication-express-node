@@ -16,6 +16,18 @@ routes.get("/", (req: Request, res: Response) => {
 routes.use("/user", verifyAccessToken, userRoutes);
 routes.use("/", authRoutes);
 
+/**
+ * @swagger
+ * /new_access_token:
+ *   get:
+ *     tags:
+ *      - Auth
+ *     summary: Use to generate new access token
+ *     description: Use this endpoint to generate a new access token.
+ *     responses:
+ *       '200':
+ *         description: Successfully created new access token
+ */
 routes.get("/new_access_token", grantNewAccessToken);
 
 export default routes;
