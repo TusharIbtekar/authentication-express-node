@@ -26,5 +26,6 @@ docker compose up -d
 ```
 
 The above commands will start the application on [http://localhost:3000/](http://localhost:3000)
+
 Visit [http://localhost:3000/api](http://localhost:3000/api) to see the api docs.
 
