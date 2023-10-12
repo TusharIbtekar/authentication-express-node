@@ -7,6 +7,7 @@
 - **ORM**: [TypeORM](https://typeorm.io/)
 - **Validator**: [express validator](https://express-validator.github.io/docs/)
 - **JWT**: [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken#readme)
+- **API UI**: [swagger](https://github.com/scottie1984/swagger-ui-express)
 
 ## Running Locally
 
@@ -25,4 +26,5 @@ docker compose up -d
 ```
 
 The above commands will start the application on [http://localhost:3000/](http://localhost:3000)
+Visit [http://localhost:3000/api](http://localhost:3000/api) to see the api docs.
 
